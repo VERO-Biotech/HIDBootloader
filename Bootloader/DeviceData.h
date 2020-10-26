@@ -36,6 +36,7 @@
 
 
 #include <QVector>
+#include <QList>
 
 
 /*!
