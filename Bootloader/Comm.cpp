@@ -29,6 +29,7 @@
 
 #include <QByteArray>
 #include <QCoreApplication>
+#include <QElapsedTimer>
 #include <QTime>
 #include <stdint.h>
 
@@ -106,7 +107,8 @@ void Comm::close(void)
 void Comm::Reset(void)
 {
     unsigned char sendPacket[65];
-    QTime elapsed;
+    //QTime elapsed;
+    QElapsedTimer elapsed;
     ErrorCode status;
 
     if(connected) {
@@ -711,7 +713,8 @@ Comm::ErrorCode Comm::GetData(uint32_t address, unsigned char bytesPerPacket,
  */
 Comm::ErrorCode Comm::Erase(void) {
     WritePacket sendPacket;
-    QTime elapsed;
+    //QTime elapsed;
+    QElapsedTimer elapsed;
     ErrorCode status;
 
     if(connected) {
@@ -745,7 +748,8 @@ Comm::ErrorCode Comm::Erase(void) {
 Comm::ErrorCode Comm::LockUnlockConfig(bool lock)
 {
     WritePacket sendPacket;
-    QTime elapsed;
+    //QTime elapsed;
+    QElapsedTimer elapsed;
     ErrorCode status;
 
     if(connected) {
@@ -787,7 +791,8 @@ Comm::ErrorCode Comm::LockUnlockConfig(bool lock)
  */
 Comm::ErrorCode Comm::ReadBootloaderInfo(BootInfo* bootInfo)
 {
-    QTime elapsed;
+    //QTime elapsed;
+    QElapsedTimer elapsed;
     WritePacket sendPacket;
     ErrorCode status;
 
@@ -844,7 +849,8 @@ Comm::ErrorCode Comm::ReadBootloaderInfo(BootInfo* bootInfo)
 
 Comm::ErrorCode Comm::ReadExtendedQueryInfo(ExtendedQueryInfo* extendedBootInfo)
 {
-    QTime elapsed;
+    //QTime elapsed;
+    QElapsedTimer elapsed;
     WritePacket sendPacket;
     ErrorCode status;
 
@@ -903,7 +909,8 @@ Comm::ErrorCode Comm::ReadExtendedQueryInfo(ExtendedQueryInfo* extendedBootInfo)
 
 Comm::ErrorCode Comm::SignFlash(void)
 {
-    QTime elapsed;
+    //QTime elapsed;
+    QElapsedTimer elapsed;
     WritePacket sendPacket;
     ErrorCode status;
     BootInfo QueryInfoBuffer;
@@ -953,7 +960,8 @@ Comm::ErrorCode Comm::SignFlash(void)
 
 Comm::ErrorCode Comm::SendPacket(unsigned char *pData, int size)
 {
-    QTime timeoutTimer;
+    //QTime timeoutTimer;
+    QElapsedTimer timeoutTimer;
     int res = 0, timeout = 5;
 
     timeoutTimer.start();
@@ -988,7 +996,7 @@ Comm::ErrorCode Comm::SendPacket(unsigned char *pData, int size)
 
 Comm::ErrorCode Comm::ReceivePacket(unsigned char *data, int size)
 {
-    QTime timeoutTimer;
+    QElapsedTimer timeoutTimer;
     int res = 0, timeout = 3;
 
     timeoutTimer.start();

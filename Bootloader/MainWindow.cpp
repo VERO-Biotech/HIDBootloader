@@ -45,11 +45,13 @@
 
 #include <QTextStream>
 #include <QByteArray>
+#include <QElapsedTimer>
 #include <QList>
 #include <QTime>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
 #include <QSettings>
+#include <QTimer>
 #include <QtWidgets/QDesktopWidget>
 #include <QtConcurrent/QtConcurrentRun>
 
@@ -477,7 +479,8 @@ void MainWindow::VerifyDevice()
 {
     Comm::ErrorCode result;
     DeviceData::MemoryRange deviceRange, hexRange;
-    QTime elapsed;
+    //QTime elapsed;
+    QElapsedTimer elapsed;
     unsigned int i, j;
     unsigned int arrayIndex;
     bool failureDetected = false;
@@ -855,7 +858,8 @@ void MainWindow::on_actionWrite_Device_triggered()
 //This thread programs previously parsed .hex file data into the device's programmable memory regions.
 void MainWindow::WriteDevice(void)
 {
-    QTime elapsed;
+    //QTime elapsed;
+    QElapsedTimer elapsed;
     Comm::ErrorCode result;
     DeviceData::MemoryRange hexRange;
 
@@ -936,7 +940,8 @@ void MainWindow::on_actionBlank_Check_triggered()
 
 void MainWindow::BlankCheckDevice(void)
 {
-    QTime elapsed;
+    //QTime elapsed;
+    QElapsedTimer elapsed;
     Comm::ErrorCode result;
     DeviceData::MemoryRange deviceRange;
 
@@ -1020,7 +1025,8 @@ void MainWindow::on_actionErase_Device_triggered()
 
 void MainWindow::EraseDevice(void)
 {
-    QTime elapsed;
+    //QTime elapsed;
+    QElapsedTimer elapsed;
     Comm::ErrorCode result;
     Comm::BootInfo bootInfo;
 
@@ -1077,6 +1083,9 @@ void MainWindow::LoadFile(QString newFileName)
     hexData->ranges.clear();
 
     //Print some debug info to the debug window.
+    //QString totalProgRegions;
+    //totalProgRegions = QString::number(deviceData->ranges.count(),10);
+    //qDebug("%s", QString("Total Programmable Regions Reported by Device: " + totalProgRegions).toStdString().c_str());
     qDebug(QString("Total Programmable Regions Reported by Device: " + QString::number(deviceData->ranges.count(), 10)).toLatin1());
 
     //First duplicate the deviceData programmable region list and
@@ -1288,7 +1297,8 @@ void MainWindow::on_action_About_triggered()
 
 void MainWindow::GetQuery()
 {
-    QTime totalTime;
+    //QTime totalTime;
+    QElapsedTimer totalTime;
     Comm::BootInfo bootInfo;
     DeviceData::MemoryRange range;
     QString connectMsg;
@@ -1380,6 +1390,7 @@ void MainWindow::GetQuery()
                 //Now fetch the extended query information packet from the USB firmware.
                 comm->ReadExtendedQueryInfo(&extendedBootInfo);
                 qDebug("Device bootloader firmware version is: " + extendedBootInfo.PIC18.bootloaderVersion);
+                //qDebug("%s", &"Device bootloader firmware version is: " [ extendedBootInfo.PIC18.bootloaderVersion]);
             }
             else
             {
